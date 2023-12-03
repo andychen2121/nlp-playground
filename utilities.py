@@ -274,10 +274,10 @@ class Trainer(transformers.Trainer):
           if self.args.n_gpu > 1:
               loss = loss.mean()  # mean() to average on multi-gpu parallel training
 
-          if self.do_grad_scaling:
-              self.scaler.scale(loss).backward()
-          else:
-              self.accelerator.backward(loss)
+          # if self.do_grad_scaling:
+          #    self.scaler.scale(loss).backward()
+          # else:
+          self.accelerator.backward(loss)
 
           return loss.detach() / self.args.gradient_accumulation_steps
 
